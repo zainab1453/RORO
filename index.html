@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- اسم علامة التبويب بالتشكيل الكامل -->
+    <title>أُخْتِي وَرَفِيقَةُ عُمْرِي ♥</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            /* خلفية ليلية مدمجة بدرجات الروز الداكن والبنفسجي الدافئ لتناسب الشهب */
+            background: linear-gradient(135deg, #1a0010 0%, #3d1f2e 50%, #2b111d 100%);
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+            color: #fff;
+        }
+
+        /* القلوب المتساقطة الناعمة في الخلفية باللون البني الشفاف */
+        .heart-bg {
+            position: absolute;
+            color: #b98b73;
+            font-size: 18px;
+            opacity: 0.15;
+            animation: fall linear infinite;
+            z-index: 1;
+            user-select: none;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* توليد النجوم الثابتة والمتلألئة في السماء */
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle infinite ease-in-out;
+            opacity: 0.3;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 30px;
+            width: 90%;
+            max-width: 480px;
+            background: rgba(88, 49, 16, 0.3); /* خلفية بنية دافئة شفافة بنمط زجاجي */
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(251, 194, 235, 0.2);
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .sky-title {
+            font-size: 1.3rem;
+            color: #fbc2eb;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+        }
+
+        /* منطقة انطلاق وحركة الشهاب الساقط السحرية */
+        .shooting-star-track {
+            position: relative;
+            width: 100%;
+            height: 80px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .shooting-star {
+            position: absolute;
+            top: 50%;
+            left: -150px;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #ff4081, transparent);
+            box-shadow: 0 0 12px #ff4081, 0 0 25px #fbc2eb;
+            transform: translateY(-50%) rotate(-5deg);
+            opacity: 0;
+        }
+        .shooting-star.animate {
+            animation: shoot 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+        @keyframes shoot {
+            0% { left: -150px; opacity: 1; width: 150px; }
+            100% { left: 110%; opacity: 0; width: 30px; }
+        }
+
+        /* صندوق كارت عرض الرسالة السحرية */
+        .message-card {
+            min-height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .message-text {
+            font-size: 1.4rem;
+            color: #fff0f5;
+            line-height: 1.7;
+            font-weight: bold;
+            text-shadow: 0 2px 8px rgba(255, 64, 129, 0.5);
+            animation: popIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        .message-text.show {
+            opacity: 1;
+        }
+
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.85); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* تصميم زر إطلاق الشهاب السحري */
+        .btn {
+            background: linear-gradient(45deg, #583110, #7f5539); /* دمج البني مع ألوان نيون بينك للهوية المدمجة */
+            border: 2px solid #ff4081;
+            color: #fff;
+            padding: 12px 35px;
+            font-size: 1.15rem;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 64, 129, 0.2);
+            transition: all 0.3s ease;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #7f5539, #ff4081);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 64, 129, 0.4);
+        }
+
+        .btn:disabled {
+            background: #4a2c11;
+            border-color: #7f5539;
+            color: #b98b73;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- حاوية النجوم المضيئة -->
+    <div id="stars-container"></div>
+    <div id="hearts-container"></div>
+
+    <div class="container">
+        <div class="sky-title">🌟 سَمَاءُ الأُمْنِيَاتِ وَالشُّهُبِ السِّحْرِيَّةِ 🌟</div>
+        
+        <!-- مسار حركة الشهاب -->
+        <div class="shooting-star-track">
+            <div class="shooting-star" id="star-element"></div>
+        </div>
+        
+        <!-- كارت عرض رسالة الشهاب الساقط -->
+        <div class="message-card">
+            <div class="message-text" id="msg-target">أَطْلِقِي شِهَابًا سِحْرِيًّا لِتَقْرَئِي أُمْنِيَاتِ قَلْبِي لَكِ.. 💫</div>
+        </div>
+
+        <button class="btn" id="action-btn" onclick="triggerShootingStar()">💫 أَطْلِقِي شِهَاباً</button>
+    </div>
+
+    <script>
+        // العبارات المخصصة والجديدة تماماً لابنة الخال والأخوة بالتشكيل الكامل
+        const quotes = [
+            "بِنْتُ الخَالِ هِيَ الأُخْتُ الَّتِي لَمْ تَلِدْهَا أُمِّي، وَسَنَدِي المَحْفُوظُ فِي القَلْبِ.. ♥",
+            "\"إِنَّمَا الرِّفَاقُ لِلرِّفَاقِ أَوطَانُ\".. وَأَنْتِ وَطَنِي السَّعِيدُ يَا رَفِيقَةَ عُمْرِي.",
+            "مَحْظُوظَةٌ جِدًّا بِالأَيَّامِ الَّتِي جَعَلَتْكِ بِنْتَ خَالِي وَأَقْرَبَ النَّاسِ لِرُوحِي.. ✨",
+            "بَعْضُ الأَصْدِقَاءِ لَيْسُوا فَقَطْ أَقَارِبَ، بَلْ هُمْ عائِلَةٌ وَأَخَوَاتٌ لِلأَبَدِ..",
+            "يَا مَن بِقُربِهَا مُرُّ الحَيَاةِ يَطِيبُ.. رَبَّاهُ لَا تَحْرِمْنِي مِنْ صَفَاءِ قَلْبِهَا.",
+            "الصَّدِيقُ جُزءٌ مِنَ الرُّوحِ وَأَنْتِ كُلُّ رُوحِي وَأَجْمَلُ صُدَفِ العُمْرِ غَالِيَتِي.. ♥"
+        ];
+
+        // توليد نجوم ثابتة عشوائية لتبدو كالسماء الحقيقية
+        const starsContainer = document.getElementById('stars-container');
+        for (let i = 0; i < 60; i++) {
+            let star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            let size = Math.random() * 2.5 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            starsContainer.appendChild(star);
+        }
+
+        let lastIndex = -1;
+
+        function triggerShootingStar() {
+            const starElement = document.getElementById('star-element');
+            const msgTarget = document.getElementById('msg-target');
+            const actionBtn = document.getElementById('action-btn');
+
+            // إيقاف الزر مؤقتاً أثناء حركة الشهاب لمنع التداخل الحركي
+            actionBtn.disabled = true;
+
+            // اختيار جملة عشوائية دون تكرار متتالٍ
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * quotes.length);
+            } while (randomIndex === lastIndex && quotes.length > 1);
+            lastIndex = randomIndex;
+
+            // إخفاء النص القديم بانسيابية استعداداً للشهاب الجديد
+            msgTarget.classList.remove('show');
+
+            // تفعيل حركة انطلاق الشهاب السريع عبر الشاشة
+            starElement.classList.remove('animate');
+            starElement.offsetHeight; /* trigger reflow */
+            starElement.classList.add('animate');
+
+            // بعد انتهاء حركة الشهاب السريع (700 مللي ثانية)، يتم عرض الرسالة الجديدة المضيئة وفك قفل الزر
+            setTimeout(() => {
+                msgTarget.innerText = quotes[randomIndex];
+                msgTarget.classList.add('show');
+                msgTarget.style.animation = 'none';
+                msgTarget.offsetHeight; /* trigger reflow */
+                msgTarget.style.animation = 'popIn 0.5s ease-out forwards';
+                actionBtn.disabled = false;
+            }, 500);
+        }
+
+        // كود توليد القلوب المتساقطة تلقائياً في الخلفية
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart-bg';
+                heart.innerText = '♥';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * -20 + 'vh';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = (Math.random() * 12 + 12) + 'px';
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+    </script>
+</body>
+</html>
